@@ -1,0 +1,9 @@
+build/
+build-*/
+*.yuv
+*.mp4
+*.gif
+compile_commands.json
+.cache/
+.DS_Store
+build-make/
