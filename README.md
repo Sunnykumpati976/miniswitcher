@@ -56,6 +56,12 @@ composite time per frame (300 frames)
 Apple M2, `clang -O2`. A 1080p60 dissolve touches 4.1 MB per frame and lands in
 1.1% of the budget, with no frame over the line.
 
+The same benchmark on the x86 CI runner under GCC averages 4062 us — 24.4% of
+budget, still with nothing over the line, but 21x the M2 figure. A shared cloud
+VM explains part of that; the rest looks like the dissolve's inner byte loop
+not getting auto-vectorised the way clang does with NEON. That gap is the
+baseline the SIMD work in the roadmap is measured against.
+
 ## Design notes
 
 **No allocation in the frame loop.** Every buffer comes from `fs_pool`, sized at
